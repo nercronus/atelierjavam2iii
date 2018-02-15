@@ -15,6 +15,33 @@ import static org.junit.Assert.*;
  */
 public class ListTest {
     
+    //@Test
+    public void deleteOK(){
+        ArrayList<String> prenom = new ArrayList<>();
+        prenom.add("axel");
+        prenom.add("thomas");
+        prenom.add("gregoire");
+        prenom.add("thomas");
+        prenom.remove("thomas");
+        System.out.println(prenom);
+    }
+        
+        @Test
+        public void removeallOK(){
+        
+          ArrayList<String> couleurs = new ArrayList<>();
+        couleurs.add("vert");
+        couleurs.add("rouge");
+        couleurs.add("noir");
+        ArrayList<String> couleurs2 = new ArrayList<>();
+        couleurs2.add("noir");
+        couleurs2.add("rouge");
+        
+        couleurs.removeAll(couleurs2);
+            System.out.println(couleurs);
+       
+    }
+        
     public int factorielle(int n){
         
         int res=n;
@@ -25,13 +52,13 @@ public class ListTest {
    }
    
     
-   @Test
+  //@Test
     public void factorielleOK(){
         int r = factorielle(20);
         System.out.println( r );
     }
     
-    @Test
+    //@Test
     public void mutiple2OK(){
         ArrayList<Integer> mutiples = new ArrayList<>();
         
@@ -44,7 +71,7 @@ public class ListTest {
         }
     }
     
-    @Test
+    //@Test
     public void addAvecIndiceOK(){
         
       ArrayList<Integer> nombresPremiers = new ArrayList<>();
@@ -57,7 +84,7 @@ public class ListTest {
       }
     }
     
-    @Test
+    //@Test
     public void removeOK(){
         
         ArrayList<String> capitale = new ArrayList<>();
