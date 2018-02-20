@@ -5,6 +5,7 @@
  */
 package atelierjava.exercice_ferme.service.test;
 
+import atelierjava.exercice_ferme.service.FermeService;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,9 +14,18 @@ import static org.junit.Assert.*;
  * @author Formation
  */
 public class FermeServiceTest {
- 
-    @Test
-    public void fermeserviceOK {
+
     
-}
+    @Test
+    public void inscriptionOK(){
+        FermeService service = new FermeService();
+        service.inscription("Acdkhhh", "Treyuuhh1");
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void inscriptionKO() {
+
+        FermeService service = new FermeService();
+        service.inscription("abcd", "Aaaaaaaa");
+    }
 }
