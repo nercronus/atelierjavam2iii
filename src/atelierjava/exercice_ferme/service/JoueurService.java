@@ -5,15 +5,29 @@
  */
 package atelierjava.exercice_ferme.service;
 
-import atelierjava.exercice_ferme.dao.FermeDAO;
-import atelierjava.exercice_ferme.entite.Ferme;
+import atelierjava.exercice_ferme.dao.JoueurDAO;
+import atelierjava.exercice_ferme.entite.Joueur;
 
 /**
  *
  * @author Formation
  */
-public class FermeService {
-
+public class JoueurService {
+    
+    
+    
+    
+    public void connexion(String pseudo, String motdepasse){
+        
+        JoueurDAO dao = new JoueurDAO();
+        
+        if(! dao.existe(pseudo, motdepasse)==true)
+            throw new RuntimeException();
+    }
+    
+    
+    
+    
     public void inscription(String pseudo, String motdepasse) {
 
         if (pseudo.length() < 3 || pseudo.length() > 8) {
@@ -32,12 +46,12 @@ public class FermeService {
             throw new RuntimeException("le mot de passe à besoin de chiffre");
         }
         
-        FermeDAO dao = new FermeDAO();
+        JoueurDAO dao = new JoueurDAO();
         if (dao.existe( pseudo )){
             throw new RuntimeException("ce pseudo existe déjà");
         }
-        Ferme ferme = new Ferme();
-        ferme.setNom(pseudo);
+        Joueur ferme = new Joueur();
+        ferme.setPseudo(pseudo);
         ferme.setMotDePasse(motdepasse);
         dao.ajouter(ferme);
     }
