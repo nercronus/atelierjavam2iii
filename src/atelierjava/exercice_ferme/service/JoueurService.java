@@ -22,7 +22,7 @@ public class JoueurService {
         JoueurDAO dao = new JoueurDAO();
         
         if(! dao.existe(pseudo, motdepasse)==true)
-            throw new RuntimeException();
+            throw new RuntimeException("echec de la connexion");
     }
     
     

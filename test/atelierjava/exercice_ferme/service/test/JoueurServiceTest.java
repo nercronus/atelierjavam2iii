@@ -15,8 +15,18 @@ import static org.junit.Assert.*;
  */
 public class JoueurServiceTest {
     
+    @Test
+    public void connexionOK(){
+        JoueurService service = new JoueurService();
+        service.inscription("Acdkhhj", "Treyuuhh1");
+        service.connexion("Acdkhhj", "Treyuuhh1");
+    }
+    
+    @Test(expected = RuntimeException.class)
     public void connexionKO(){
         
+        JoueurService service = new JoueurService();
+        service.connexion("Acdkhhh","TreyuuhH1");
     }
 
     @Test

@@ -7,6 +7,9 @@ package atelierjava.exercice_ferme.dao;
 
 import atelierjava.exercice_ferme.entite.Joueur;
 import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -14,44 +17,47 @@ import java.util.ArrayList;
  */
 public class JoueurDAO {
     
+    
     public Boolean existe(String pseudo, String motdepasse){
-        for (Joueur joueurAct : joueurs){
-            if(joueurAct.getPseudo().equals(pseudo) && joueurAct.getMotDePasse().equals(motdepasse)){
-                return true;
-            }
-               
-        }
-      return false;
+        
+      EntityManager em = Persistence.createEntityManagerFactory("PU_exerciceferme").createEntityManager();
+      
+      Query query = em.createQuery("select j from Joueur j where j.pseudo=:pseudoExistant and j.motDePasse=:motdepasse");
+      query.setParameter("pseudoExistant", pseudo);
+      query.setParameter("motDePasse", motdepasse);
+      
+      long nbREA = (long) query.getSingleResult();
+      
+      if(nbREA==0 )
+          return false;
+      
+      return true;
     }
     
 
     public boolean existe(String login) {
-        Joueur f = this.recherche(login);
-        if (f==null) {
-            return false;
-        }
-        return true;
         
     }
 
-    public void ajouter(Joueur ferme) {
+    public void ajouter(Joueur j) {
         
-        joueurs.add( ferme );
+        EntityManager em = Persistence.createEntityManagerFactory("PU_exerciceferme").createEntityManager();
+    
+        em.getTransaction().begin();
+        em.persist(j);
+        em.getTransaction().commit();
     }
     
     public Joueur recherche(String pseudo){
         
-        for ( Joueur fermeAct : joueurs){
-            if(fermeAct.getPseudo().equals(pseudo)){
-                return fermeAct;
-            }
-        }
-        return null;
+        EntityManager em = Persistence.createEntityManagerFactory("PU_exerciceferme").createEntityManager();
+        
+        Query query = em.createQuery("select j from Joueur j where j.pseudo=:pseudoRecherche");
+        query.setParameter("pseudoRecherche", pseudo);
+        
+        Joueur j = (Joueur) query.getSingleResult();
+        return j;
     }
-    
-    private static ArrayList<Joueur> joueurs = new ArrayList<>();
-    
-    
 }
 
 
