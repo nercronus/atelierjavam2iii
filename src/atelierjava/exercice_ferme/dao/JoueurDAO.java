@@ -17,21 +17,27 @@ import javax.persistence.Query;
  */
 public class JoueurDAO {
     
+    public Joueur rechercher (long idJoueur){
+        
+        EntityManager em = Persistence.createEntityManagerFactory("PU_exerciceferme").createEntityManager();
+        
+        Joueur j = em.find(Joueur.class, idJoueur);
+        
+        return j;
+    }
     
-    public Boolean existe(String pseudo, String motDePasse){
+    public Joueur rechecher(String pseudo, String motDePasse){
         
       EntityManager em = Persistence.createEntityManagerFactory("PU_exerciceferme").createEntityManager();
       
-      Query query = em.createQuery("select count(j) from Joueur j where j.pseudo=:pseudoExistant and j.motDePasse=:motDePasse");
+      Query query = em.createQuery("select j from Joueur j where j.pseudo=:pseudoExistant and j.motDePasse=:motDePasse");
       query.setParameter("pseudoExistant", pseudo);
       query.setParameter("motDePasse", motDePasse);
       
-      long nbREA = (long) query.getSingleResult();
-      
-      if(nbREA==0 )
-          return false;
-      
-      return true;
+      Joueur j = (Joueur) query.getSingleResult();
+    
+      return j;
+     
     }
     
 

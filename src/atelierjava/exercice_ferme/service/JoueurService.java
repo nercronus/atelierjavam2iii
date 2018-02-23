@@ -6,7 +6,9 @@
 package atelierjava.exercice_ferme.service;
 
 import atelierjava.exercice_ferme.dao.JoueurDAO;
+import atelierjava.exercice_ferme.dao.RessourceDAO;
 import atelierjava.exercice_ferme.entite.Joueur;
+import atelierjava.exercice_ferme.entite.Ressource;
 
 /**
  *
@@ -14,15 +16,50 @@ import atelierjava.exercice_ferme.entite.Joueur;
  */
 public class JoueurService {
     
+    public void ajouterRessource(long joueurID,Ressource.TypeRessource typeRessource,long quantite){
+        
+        
+         JoueurDAO dao = new JoueurDAO();
+        Joueur joueur = dao.rechercher(joueurID);
+       
+            
+            for(int i=0;i<quantite;i++){
+                
+                Ressource ressource = new Ressource();
+                ressource.setDesignation(typeRessource);
+                ressource.setJoueur(joueur);
+                joueur.getRessourcesPossedees().add(ressource);
+                
+                RessourceDAO ressourceDAO = new RessourceDAO();
+                ressourceDAO.ajouter(ressource);
+            }
+    }
     
-    
-    
-    public void connexion(String pseudo, String motdepasse){
+    public void rejoindrePartie(long idJoueur){
         
         JoueurDAO dao = new JoueurDAO();
+        Joueur joueur = dao.rechercher(idJoueur);
+       if (joueur.getRessourcesPossedees().isEmpty()){
+           
+           this.ajouterRessource(idJoueur, Ressource.TypeRessource.CAROTTE,5);
+           
+           this.ajouterRessource(idJoueur, Ressource.TypeRessource.BLE,5);
+           
+           this.ajouterRessource(idJoueur, Ressource.TypeRessource.FERMIER,2);
+           
+           this.ajouterRessource(idJoueur, Ressource.TypeRessource.CHEVRE, 5);
+       }
+    }
+    
+    
+    
+    
+    public Joueur connexion(String pseudo, String motdepasse){
         
-        if(! dao.existe(pseudo, motdepasse)==true)
-            throw new RuntimeException("echec de la connexion");
+        JoueurDAO dao = new JoueurDAO();
+        Joueur j = dao.rechecher(pseudo, motdepasse);
+        
+        return j;
     }
     
     
