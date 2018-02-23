@@ -26,7 +26,7 @@ public class JoueurServiceTest {
     public void connexionKO(){
         
         JoueurService service = new JoueurService();
-        service.connexion("Acdkhhh","TreyuuhH1");
+        service.connexion("Acdkheh","Treyuuhh1");
     }
 
     @Test

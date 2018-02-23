@@ -18,13 +18,13 @@ import javax.persistence.Query;
 public class JoueurDAO {
     
     
-    public Boolean existe(String pseudo, String motdepasse){
+    public Boolean existe(String pseudo, String motDePasse){
         
       EntityManager em = Persistence.createEntityManagerFactory("PU_exerciceferme").createEntityManager();
       
-      Query query = em.createQuery("select j from Joueur j where j.pseudo=:pseudoExistant and j.motDePasse=:motdepasse");
+      Query query = em.createQuery("select count(j) from Joueur j where j.pseudo=:pseudoExistant and j.motDePasse=:motDePasse");
       query.setParameter("pseudoExistant", pseudo);
-      query.setParameter("motDePasse", motdepasse);
+      query.setParameter("motDePasse", motDePasse);
       
       long nbREA = (long) query.getSingleResult();
       
@@ -35,8 +35,19 @@ public class JoueurDAO {
     }
     
 
-    public boolean existe(String login) {
+    public boolean existe(String pseudo) {
         
+        EntityManager em = Persistence.createEntityManagerFactory("PU_exerciceferme").createEntityManager();
+        
+        Query query = em.createQuery("select count(j) from Joueur j where j.pseudo=:pseudoExistant");
+        query.setParameter("pseudoExistant", pseudo);
+        
+        long nbJoueurs = (long) query.getSingleResult();
+        
+        if( nbJoueurs>0 )
+            return true;
+        
+        return false;
     }
 
     public void ajouter(Joueur j) {
