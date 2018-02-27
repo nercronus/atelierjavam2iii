@@ -41,7 +41,13 @@ public class NewFXMain extends Application {
             root.setCenter(new IncriptionView(root));
             
         });
-        
+        bconnexion.setOnAction(e -> {
+            System.err.println("azerty");
+            
+            root.setCenter(new ConnexionView(root));
+            
+            
+        });
         root.setTop(vbox);
         
         root.setBottom( new Label("copyright 2018 M2IIIII"));
