@@ -5,8 +5,8 @@
  */
 package atelierjava.exercice_ferme.service;
 
-import atelierjava.exercice_ferme.dao.JoueurDAO;
-import atelierjava.exercice_ferme.dao.RessourceDAO;
+import atelierjava.exercice_ferme.view.JoueurDAO;
+import atelierjava.exercice_ferme.view.RessourceDAO;
 import atelierjava.exercice_ferme.entite.Joueur;
 import atelierjava.exercice_ferme.entite.Ressource;
 

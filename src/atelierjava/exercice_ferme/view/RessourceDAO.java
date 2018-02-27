@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package atelierjava.exercice_ferme.dao;
+package atelierjava.exercice_ferme.view;
 
 import atelierjava.exercice_ferme.entite.Ressource;
 import javax.persistence.EntityManager;
