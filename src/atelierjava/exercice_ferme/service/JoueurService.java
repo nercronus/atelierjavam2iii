@@ -9,6 +9,8 @@ import atelierjava.exercice_ferme.view.JoueurDAO;
 import atelierjava.exercice_ferme.view.RessourceDAO;
 import atelierjava.exercice_ferme.entite.Joueur;
 import atelierjava.exercice_ferme.entite.Ressource;
+import atelierjava.exercice_ferme.exception.PseudoExisteException;
+import atelierjava.exercice_ferme.exception.ValidationException;
 
 /**
  *
@@ -65,10 +67,10 @@ public class JoueurService {
     
     
     
-    public void inscription(String pseudo, String motdepasse) {
+    public void inscription(String pseudo, String motdepasse) throws ValidationException, PseudoExisteException {
 
         if (pseudo.length() < 3 || pseudo.length() > 8) {
-            throw new RuntimeException("le pseudo doit être compris entre 3 et 8 caractere");
+            throw new ValidationException("le pseudo doit être compris entre 3 et 8 caractere");
         }
         if (!pseudo.matches("")) {
             ;
@@ -85,7 +87,8 @@ public class JoueurService {
         
         JoueurDAO dao = new JoueurDAO();
         if (dao.existe( pseudo )){
-            throw new RuntimeException("ce pseudo existe déjà");
+            throw new PseudoExisteException("ce pseudo existe déjà");
+            
         }
         Joueur ferme = new Joueur();
         ferme.setPseudo(pseudo);

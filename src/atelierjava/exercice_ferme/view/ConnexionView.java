@@ -44,14 +44,14 @@ public class ConnexionView extends GridPane {
         JoueurService service = new JoueurService();
     service.connexion(pseudo, mdp);
 
-    borderPaneDuParent.setCenter(new Label("Connexion Réussie"));
+    borderPaneDuParent.setCenter( new EcransJeuView() );
     } catch (Exception erreur) { // Pour ratisser large, toutes les erreurs
-
+            erreur.printStackTrace();
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
-        alert.setTitle("AAA");
-        alert.setHeaderText("BBB");
-        alert.setContentText("Echec de connexion");
+        alert.setTitle("Attention");
+        alert.setHeaderText("attention erreur");
+        alert.setContentText(erreur.getMessage());
         alert.showAndWait();
         }
 
